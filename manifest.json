@@ -1,0 +1,31 @@
+{
+  "devMode": true,
+  "version": "0.2.1",
+  "name": "phpMyAdmin Installer",
+  "identifier": "com.koding.liongold.apps.phpmyadmin-installer",
+  "authorNick": "Liongold",
+  "path": "~/Applications/phpMyAdmin-Installer.kdapp",
+  "homepage": "liongold.koding.com/phpMyAdmin-Installer",
+  "author": "Jean Spiteri",
+  "repository": "git://github.com/Liongold/phpMyAdmin-Installer.kdapp.git",
+  "description": "phpMyAdmin-Installer : a Koding application which lets you install phpMyAdmin to your Koding VM with a push of a button. ",
+  "category": "web-app",
+  "source": {
+    "blocks": {
+      "app": {
+        "files": [
+          "./index.coffee"
+        ]
+      }
+    },
+    "stylesheets": [
+      "./resources/style.css"
+    ]
+  },
+  "options": {
+    "type": "tab"
+  },
+  "icns": {
+    "128": "./resources/phpmyadmin.png"
+  }
+}
