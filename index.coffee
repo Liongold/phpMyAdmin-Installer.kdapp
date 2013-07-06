@@ -28,7 +28,7 @@ class MainView extends JView
         version = input[0].getValue()
         language = input[1].getValue()
         command = KD.getSingleton "kiteController"
-        command.run "cd ~/Web/ && wget http://sourceforge.net/projects/phpmyadmin/files/phpMyAdmin/#{version}/phpMyAdmin-#{version}-#{language}.zip && unzip phpMyAdmin-#{version}-#{language}.zip && mv phpMyAdmin-#{version}-#{language} phpmyadmin && rm -f phpMyAdmin-#{version}-#{language}.zip && cd phpmyadmin", (err, response)=>
+        command.run "cd ~/Web/ && wget http://sourceforge.net/projects/phpmyadmin/files/phpMyAdmin/#{version}/phpMyAdmin-#{version}-#{language}.zip && unzip phpMyAdmin-#{version}-#{language}.zip && mv phpMyAdmin-#{version}-#{language} phpmyadmin && rm -f phpMyAdmin-#{version}-#{language}.zip && cd phpmyadmin && mkdir config && mv config.sample.inc.php config.inc.php", (err, response)=>
           if err
             new KDNotificationView
               title: "There was an error installing phpMyAdmin. Please try again. "
