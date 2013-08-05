@@ -1,6 +1,6 @@
 {
   "devMode": true,
-  "version": "0.3",
+  "version": "0.4",
   "name": "phpMyAdmin Installer",
   "identifier": "com.koding.liongold.apps.phpmyadmin-installer",
   "authorNick": "Liongold",
@@ -25,7 +25,7 @@
   "options": {
     "type": "tab"
   },
-  "icns": {
+  "icons": {
     "128": "./resources/phpmyadmin.png"
   }
 }
