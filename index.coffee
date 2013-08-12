@@ -25,8 +25,13 @@ class InstallerView extends JView
       style: "cupid-green"
       loader:
           color: "#FFFFFF"
-          diameter: 15
+          diameter: 20
       callback:=>
+        new KDNotificationView
+            title: "Installing phpMyAdmin..."
+            cssClass: "success"
+            type: "mini"
+            duration: 5000
         input = KDFormView.findChildInputs @
         version = input[0].getValue()
         language = input[1].getValue()
@@ -34,12 +39,19 @@ class InstallerView extends JView
         command.run "cd ~/Web/ && wget http://sourceforge.net/projects/phpmyadmin/files/phpMyAdmin/#{version}/phpMyAdmin-#{version}-#{language}.zip && unzip phpMyAdmin-#{version}-#{language}.zip && mv phpMyAdmin-#{version}-#{language} phpmyadmin && rm -f phpMyAdmin-#{version}-#{language}.zip && cd phpmyadmin && mkdir config && mv config.sample.inc.php config.inc.php", (err, response)=>
           if err
             new KDNotificationView
-              title: "There was an error installing phpMyAdmin. Please try again. "
+              title: "There was an error installing phpMyAdmin. Please try again."
+              cssClass: "success"
+              type: "mini"
+              duration: 5000
             @install_button.hideLoader()
           else
             new KDNotificationView
-              title: "Successfully Installed!"
-            @install_button.hideLoader()
+              title: "Successfully Installed"
+              cssClass: "success"
+              type: "mini"
+              duration: 5000
+            appView.destroySubViews()
+            appView.addSubView new PanelView
   pistachio:->
     """
     {{> @header}}
@@ -81,15 +93,26 @@ class PanelView extends JView
     @delete_button = new KDButtonView
       title: "Delete"
       style: "clean-red"
+      loader:
+          color: "#FFFFFF"
+          diameter: 20
       callback:=>
         command = KD.getSingleton "kiteController"
         command.run "cd ~/Web/ && rm -r phpmyadmin", (err, reponse) =>
             if err
                 new KDNotificationView
                     title: "There was an error deleting phpMyAdmin. Please try again. "
+                    cssClass: "success"
+                    type: "mini"
+                    duration: 5000
             else
-                new KDNotificationview
-                    title: "Successfully Deleted!"
+                new KDNotificationView
+                    title: "Successfully Deleted"
+                    cssClass: "success"
+                    type: "mini"
+                    duration: 5000
+                appView.destroySubViews()
+                appView.addSubView new InstallerView
   pistachio:->
     """
     {{> @header}}
