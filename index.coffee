@@ -29,7 +29,6 @@ class InstallerView extends JView
       callback:=>
         new KDNotificationView
             title: "Installing phpMyAdmin..."
-            cssClass: "success"
             type: "mini"
             duration: 5000
         input = KDFormView.findChildInputs @
@@ -40,7 +39,6 @@ class InstallerView extends JView
           if err
             new KDNotificationView
               title: "There was an error installing phpMyAdmin. Please try again."
-              cssClass: "success"
               type: "mini"
               duration: 5000
             @install_button.hideLoader()
@@ -97,12 +95,15 @@ class PanelView extends JView
           color: "#FFFFFF"
           diameter: 20
       callback:=>
+        new KDNotificationView
+            title: "Deleting phpMyAdmin..."
+            type: "mini"
+            duration: 5000
         command = KD.getSingleton "kiteController"
         command.run "cd ~/Web/ && rm -r phpmyadmin", (err, reponse) =>
             if err
                 new KDNotificationView
                     title: "There was an error deleting phpMyAdmin. Please try again. "
-                    cssClass: "success"
                     type: "mini"
                     duration: 5000
             else
