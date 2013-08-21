@@ -25,7 +25,7 @@ class InstallerView extends JView
       style: "cupid-green"
       loader:
           color: "#FFFFFF"
-          diameter: 20
+          diameter: 15
       callback:=>
         new KDNotificationView
             title: "Installing phpMyAdmin..."
@@ -41,6 +41,7 @@ class InstallerView extends JView
               title: "There was an error installing phpMyAdmin. Please try again."
               type: "mini"
               duration: 5000
+              cssClass: "error"
             @install_button.hideLoader()
           else
             new KDNotificationView
@@ -93,7 +94,7 @@ class PanelView extends JView
       style: "clean-red"
       loader:
           color: "#FFFFFF"
-          diameter: 20
+          diameter: 15
       callback:=>
         new KDNotificationView
             title: "Deleting phpMyAdmin..."
@@ -105,6 +106,7 @@ class PanelView extends JView
                 new KDNotificationView
                     title: "There was an error deleting phpMyAdmin. Please try again. "
                     type: "mini"
+                    cssClass: "error"
                     duration: 5000
             else
                 new KDNotificationView

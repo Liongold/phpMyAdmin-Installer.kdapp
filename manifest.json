@@ -1,6 +1,6 @@
 {
   "devMode": true,
-  "version": "0.6",
+  "version": "0.6.1",
   "name": "phpMyAdmin Installer",
   "identifier": "com.koding.liongold.apps.phpmyadmin-installer",
   "authorNick": "Liongold",
