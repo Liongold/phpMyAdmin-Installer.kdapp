@@ -7,9 +7,9 @@ class InstallerView extends JView
     @installer = new KDSelectBox
       type: "select"
       name: "version"
-      defaultValue: "4.0.8"
+      defaultValue: "4.0.9"
       selectOptions: [
-                      { title:"4.0.8 (Recommended)", value:"4.0.8" }
+                      { title:"4.0.9 (Recommended)", value:"4.0.9" }
                       { title: "3.5.8.2", value:"3.5.8.2" }
                     ]
     @language_selector = new KDSelectBox

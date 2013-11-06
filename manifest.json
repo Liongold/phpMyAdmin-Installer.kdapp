@@ -8,7 +8,7 @@
   "forceUpdate": false,
   "openWith": "lastActive",
   "behavior": "application",
-  "version": "0.8",
+  "version": "0.9",
   "repo": "git://github.com/Liongold/phpMyAdmin-Installer.kdapp.git",
   "name": "phpMyAdmin Installer",
   "identifier": "com.koding.apps.phpmyadmin-installer",
