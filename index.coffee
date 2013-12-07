@@ -7,9 +7,9 @@ class InstallerView extends JView
     @installer = new KDSelectBox
       type: "select"
       name: "version"
-      defaultValue: "4.0.9"
+      defaultValue: "4.0.10"
       selectOptions: [
-                      { title:"4.0.9 (Recommended)", value:"4.0.9" }
+                      { title:"4.0.10 (Recommended)", value:"4.0.10" }
                       { title: "3.5.8.2", value:"3.5.8.2" }
                     ]
     @language_selector = new KDSelectBox
@@ -27,30 +27,44 @@ class InstallerView extends JView
           color: "#FFFFFF"
           diameter: 15
       callback:=>
-        new KDNotificationView
-            title: "Installing phpMyAdmin..."
-            type: "mini"
-            duration: 5000
         input = KDFormView.findChildInputs @
         version = input[0].getValue()
         language = input[1].getValue()
         command = KD.getSingleton "kiteController"
-        command.run "cd ~/Web/ && wget http://sourceforge.net/projects/phpmyadmin/files/phpMyAdmin/#{version}/phpMyAdmin-#{version}-#{language}.zip && unzip phpMyAdmin-#{version}-#{language}.zip && mv phpMyAdmin-#{version}-#{language} phpmyadmin && rm -f phpMyAdmin-#{version}-#{language}.zip && cd phpmyadmin && mkdir config && mv config.sample.inc.php config.inc.php", (err, response)=>
-          if err
-            new KDNotificationView
-              title: "There was an error installing phpMyAdmin. Please try again."
-              type: "mini"
-              duration: 5000
-              cssClass: "error"
-            @install_button.hideLoader()
-          else
-            new KDNotificationView
-              title: "Successfully Installed"
-              cssClass: "success"
-              type: "mini"
-              duration: 5000
-            appView.destroySubViews()
-            appView.addSubView new PanelView
+        new KDNotificationView
+            title: "Downloading phpMyAdmin #{version}..."
+            type: "mini"
+            duration: 15000
+        command.run "cd ~/Web/ && wget http://sourceforge.net/projects/phpmyadmin/files/phpMyAdmin/#{version}/phpMyAdmin-#{version}-#{language}.zip", (err, response)=>
+            if err
+                new KDNotificationView
+                    title: "There was an error downloading phpMyAdmin. Please try again in a few minutes. "
+                    type: "mini"
+                    duration: 5000
+                    cssClass: "error"
+                @install_button.hideLoader()
+            else
+                new KDNotificationView
+                    title: "Installing phpMyAdmin #{version}..."
+                    type: "mini"
+                    duration: 5000
+                command.run "cd ~/Web/ && unzip phpMyAdmin-#{version}-#{language}.zip && mv phpMyAdmin-#{version}-#{language} phpmyadmin && rm -f phpMyAdmin-#{version}-#{language}.zip && cd phpmyadmin && mkdir config && mv config.sample.inc.php config.inc.php", (err, response)=>
+                    if err
+                        new KDNotificationView
+                            title: "There was an error installing phpMyAdmin. Please try again later. "
+                            type: "mini"
+                            duration: 5000
+                            cssClass: "error"
+                        @install_button.hideLoader()
+                    else
+                        new KDNotificationView
+                            title: "Successfully Installed!"
+                            cssClass: "success"
+                            type: "mini"
+                            duration: 5000
+                            @install_button.hideLoader()
+                            appView.destroySubViews()
+                            appView.addSubView new PanelView
   pistachio:->
     """
     {{> @header}}
@@ -88,7 +102,7 @@ class PanelView extends JView
       style: "update_button"
       callback:=>
         new KDNotificationView
-          title: "Coming Soon"
+          title: "Coming Soon..."
     @delete_button = new KDButtonView
       title: "Delete"
       style: "clean-red"
